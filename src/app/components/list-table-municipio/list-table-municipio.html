@@ -1,0 +1,48 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+
+<div *ngIf="!loading" class="container">
+  <div class="title">
+    <h4>Listado de Municipios</h4>
+    <button
+      type="button"
+      class="btn btn-primary"
+      routerLink="/municipios/add"
+    >
+      Agregar Municipio
+    </button>
+  </div>
+  <table *ngIf="listMunicipio.length > 0" class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID Municipio</th>
+        <th scope="col">Nombre del Municipio</th>
+        <th scope="col">ID del Departamento</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let municipio of listMunicipio" class="table-active">
+        <td>{{ municipio.id }}</td>
+        <td>{{ municipio.nombre }}</td>
+        <td>{{ municipio.id_departamento }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-info btn-sm"
+            routerLink="/municipios/edit/{{ municipio.id }}"
+          >
+            Editar
+          </button>
+          <button
+            (click)="deleteMunicipio(municipio.id!)"
+            type="button"
+            class="btn btn-danger btn-sm ms-2"
+          >
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 *ngIf="listMunicipio.length == 0">No hay Municipios para mostrar</h5>
+</div>

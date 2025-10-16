@@ -1,0 +1,54 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+
+<div *ngIf="!loading" class="row mt-1">
+  <div class="col-lg-6 offset-lg-3">
+    <div class="card border-secondary mb-3">
+      <div class="card-header text-center">{{ operacion }} Empresa</div>
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="addEmpresa()">
+          <label for="nit" class="form-label">NIT</label>
+          <input id="nit" formControlName="nit" type="text" class="form-control" placeholder="NIT" />
+          
+          <label for="razon" class="form-label mt-2">Razón Social</label>
+          <input id="razon" formControlName="razon_social" type="text" class="form-control" placeholder="Razón Social" />
+
+          <label for="nombre_comercial" class="form-label mt-2">Nombre Comercial</label>
+          <input id="nombre_comercial" formControlName="nombre_comercial" type="text" class="form-control" placeholder="Nombre Comercial" />
+
+          <label for="telefono" class="form-label mt-2">Teléfono</label>
+          <input id="telefono" formControlName="telefono" type="text" class="form-control" placeholder="Teléfono" />
+
+          <label for="correo" class="form-label mt-2">Correo</label>
+          <input id="correo" formControlName="correo_electronico" type="email" class="form-control" placeholder="Correo" />
+
+          <label for="pais" class="form-label mt-3">País</label>
+          <select id="pais" class="form-control" formControlName="id_pais">
+            <option value="" disabled selected>Seleccione un país</option>
+            <option *ngFor="let pais of listPaises" [value]="pais.id">{{ pais.nombre }}</option>
+          </select>
+
+          <label for="departamento" class="form-label mt-3">Departamento</label>
+          <select id="departamento" class="form-control" formControlName="id_departamento">
+            <option value="" disabled selected>Seleccione un departamento</option>
+            <option *ngFor="let dep of departamentosFiltrados" [value]="dep.id">{{ dep.nombre }}</option>
+          </select>
+
+          <label for="municipio" class="form-label mt-3">Municipio</label>
+          <select id="municipio" class="form-control" formControlName="id_municipio">
+            <option value="" disabled selected>Seleccione un municipio</option>
+            <option *ngFor="let m of municipiosFiltrados" [value]="m.id">{{ m.nombre }}</option>
+          </select>
+
+          <div class="row mt-3 text-center">
+            <div class="col-lg-6">
+              <button type="submit" [disabled]="form.invalid" class="btn btn-success">Guardar</button>
+            </div>
+            <div class="col-lg-6">
+              <button type="button" class="btn btn-danger" routerLink="/empresas">Cancelar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

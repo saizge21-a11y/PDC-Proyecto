@@ -1,0 +1,30 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+
+<div *ngIf="!loading" class="container">
+    <div class="title">
+        <h4>Listado de paises</h4>
+        <button type="button" class="btn btn-primary" routerLink="/paises/add">Agregar País</button>
+    </div>
+    <table *ngIf="listPaises.length > 0" class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID Pais</th>
+      <th scope="col">Nombre del País</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pais of listPaises" class="table-active">
+      <td>{{ pais.id }}</td>
+      <td>{{ pais.nombre }}</td>
+      <td> 
+        <button type="button" class="btn btn-info btn-sm" routerLink="/paises/edit/{{pais.id}}">Editar</button>
+        <button (click)="deletePais(pais.id!)" type="button" class="btn btn-danger btn-sm ms-2">Eliminar</button>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+<h5 *ngIf="listPaises.length == 0">No hay Paises para mostrar</h5>
+</div>
+

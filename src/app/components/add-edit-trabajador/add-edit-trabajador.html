@@ -1,0 +1,134 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+
+<div *ngIf="!loading" class="row mt-1">
+  <div class="col-lg-4 offset-lg-4">
+    <div class="card border-secondary mb-3" style="max-width: 30rem">
+      <div class="card-header text-center">{{ operacion }}</div>
+
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="addTrabajador()">
+          
+          <!-- Nombre completo -->
+          <label for="nombre_completo" class="form-label">Nombre completo</label>
+          <input
+            id="nombre_completo"
+            type="text"
+            formControlName="nombre_completo"
+            class="form-control"
+            placeholder="Ingrese nombre completo"
+          />
+
+          <!-- Edad -->
+          <label for="edad" class="form-label mt-3">Edad</label>
+          <input
+            id="edad"
+            type="number"
+            formControlName="edad"
+            class="form-control"
+            placeholder="Ingrese edad"
+          />
+
+          <!-- Teléfono -->
+          <label for="telefono" class="form-label mt-3">Teléfono</label>
+          <input
+            id="telefono"
+            formControlName="telefono"
+            type="text"
+            class="form-control"
+            placeholder="Ingrese teléfono"
+          />
+
+          <!-- Correo -->
+          <label for="correo" class="form-label mt-3">Correo electrónico</label>
+          <input
+            id="correo"
+            formControlName="correo_electronico"
+            type="email"
+            class="form-control"
+            placeholder="Ingrese correo electrónico"
+          />
+
+          <!-- País -->
+          <label for="pais" class="form-label mt-3">País</label>
+          <select
+            id="pais"
+            class="form-control"
+            formControlName="id_pais"
+            (change)="onPaisChange()"
+          >
+            <option value="">Seleccione un país</option>
+            <option *ngFor="let pais of listPaises" [value]="pais.id">
+              {{ pais.nombre }}
+            </option>
+          </select>
+
+          <!-- Departamento -->
+          <label for="departamento" class="form-label mt-3">Departamento</label>
+          <select
+            id="departamento"
+            class="form-control"
+            formControlName="id_departamento"
+            (change)="onDepartamentoChange()"
+            [disabled]="!form.value.id_pais"
+          >
+            <option value="">Seleccione un departamento</option>
+            <option *ngFor="let dep of listDepartamentos" [value]="dep.id">
+              {{ dep.nombre }}
+            </option>
+          </select>
+
+          <!-- Municipio -->
+          <label for="municipio" class="form-label mt-3">Municipio</label>
+          <select
+            id="municipio"
+            class="form-control"
+            formControlName="id_municipio"
+            (change)="loadEmpresas()"
+            [disabled]="!form.value.id_departamento"
+          >
+            <option value="">Seleccione un municipio</option>
+            <option *ngFor="let mun of listMunicipios" [value]="mun.id">
+              {{ mun.nombre }}
+            </option>
+          </select>
+
+          <!-- Empresa -->
+          <label for="empresa" class="form-label mt-3">Empresa</label>
+          <select
+            id="empresa"
+            class="form-control"
+            formControlName="id_empresa"
+            [disabled]="!listEmpresas.length"
+          >
+            <option value="">Seleccione una empresa</option>
+            <option *ngFor="let emp of listEmpresas" [value]="emp.id">
+              {{ emp.razon_social }}
+            </option>
+          </select>
+
+          <!-- Botones -->
+          <div class="row mt-4 text-center">
+            <div class="col-lg-6">
+              <button
+                type="submit"
+                class="btn btn-success w-100"
+                [disabled]="form.invalid || loading"
+              >
+                Guardar
+              </button>
+            </div>
+            <div class="col-lg-6">
+              <button
+                type="button"
+                class="btn btn-danger w-100"
+                routerLink="/trabajadores"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

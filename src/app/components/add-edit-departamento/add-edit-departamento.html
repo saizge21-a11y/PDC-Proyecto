@@ -1,0 +1,45 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+
+<div *ngIf="!loading" class="row mt-1">
+  <div class="col-lg-4 offset-lg-4">
+    <div class="card border-secondary mb-3" style="max-width: 30rem">
+      <div class="card-header text-center">{{ operacion }} Departamento</div>
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="addDep()">
+          <label for="name" class="form-label">Nombre del Departamento</label>
+          <input
+            id="name"
+            formControlName="name"
+            type="text"
+            class="form-control"
+            placeholder="Ingrese nombre"
+          />
+          <span *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">
+            El nombre es <strong>requerido</strong>
+          </span>
+
+          <label for="pais" class="form-label mt-3">País</label>
+          <select class="form-control" id="id_pais" formControlName="id_pais">
+            <option value="" disabled selected>Seleccione un país</option>
+            <option *ngFor="let pais of listPaises" [value]="pais.id">
+              {{ pais.nombre }}
+            </option>
+          </select>
+
+          <div class="row mt-3 text-center">
+            <div class="col-lg-6">
+              <button type="submit" [disabled]="form.invalid" class="btn btn-success">
+                Guardar
+              </button>
+            </div>
+            <div class="col-lg-6">
+              <button type="button" class="btn btn-danger" routerLink="/departamentos">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

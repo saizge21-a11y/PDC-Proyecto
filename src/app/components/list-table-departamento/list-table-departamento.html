@@ -1,0 +1,32 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+
+<div *ngIf="!loading" class="container">
+    <div class="title">
+        <h4>Listado de Departamentos</h4>
+        <button type="button" class="btn btn-primary" routerLink="/departamentos/add">Agregar Departamento</button>
+    </div>
+    <table *ngIf="listDepartamento.length > 0" class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">ID Departamento</th>
+      <th scope="col">Nombre del Departamento</th>
+      <th scope="col">ID del País</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let departamento of listDepartamento" class="table-active">
+      <td>{{ departamento.id }}</td>
+      <td>{{ departamento.nombre }}</td>
+      <td>{{ departamento.id_pais }}</td>
+      <td> 
+        <button type="button" class="btn btn-info btn-sm" routerLink="/departamentos/edit/{{departamento.id}}">Editar</button>
+        <button (click)="deleteDep(departamento.id!)" type="button" class="btn btn-danger btn-sm ms-2">Eliminar</button>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+<h5 *ngIf="listDepartamento.length == 0">No hay Paises para mostrar</h5>
+</div>
+

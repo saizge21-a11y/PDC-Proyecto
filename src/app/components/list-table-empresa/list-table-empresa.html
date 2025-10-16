@@ -1,0 +1,36 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+
+<div *ngIf="!loading" class="container">
+  <div class="title">
+    <h4>Listado de Empresas</h4>
+    <button type="button" class="btn btn-primary" routerLink="/empresas/add">Agregar Empresa</button>
+  </div>
+
+  <table *ngIf="listEmpresa.length > 0" class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID Empresa</th>
+        <th scope="col">NIT</th>
+        <th scope="col">Razón Social</th>
+        <th scope="col">Nombre Comercial</th>
+        <th scope="col">Ubicación</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of listEmpresa" class="table-active">
+        <td>{{ emp.id }}</td>
+        <td>{{ emp.nit }}</td>
+        <td>{{ emp.razon_social }}</td>
+        <td>{{ emp.nombre_comercial }}</td>
+        <td>{{ emp.id_pais }} / {{ emp.id_departamento }} / {{ emp.id_municipio }}</td>
+        <td>
+          <button type="button" class="btn btn-info btn-sm" routerLink="/empresas/edit/{{ emp.id }}">Editar</button>
+          <button (click)="deleteEmpresa(emp.id!)" type="button" class="btn btn-danger btn-sm ms-2">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h5 *ngIf="listEmpresa.length == 0">No hay Empresas para mostrar</h5>
+</div>
