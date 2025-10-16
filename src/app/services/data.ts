@@ -23,15 +23,15 @@ export class DataServices {
 
   constructor(private http: HttpClient) {
     this.myAppUrl = environment.apiUrl;
-    this.myApiUrl = 'pais/';
-    this.myApiUrlDep = 'departamento/';
-    this.myApiUrlMun = 'municipio/';
-    this.myApiUrlEm = 'empresa/';
-    this.myApiUrlTr = 'trabajador/';
-    this.myApiUrlAsig = 'empresa-trabajador/'; 
+    this.myApiUrl = '/api/pais/';
+    this.myApiUrlDep = '/api/departamento/';
+    this.myApiUrlMun = '/api/municipio/';
+    this.myApiUrlEm = '/api/empresa/';
+    this.myApiUrlTr = '/api/trabajador/';
+    this.myApiUrlAsig = '/api/empresa-trabajador/'; 
   }
 
-  // --- País ---
+  // --- País ---W
   getListPaises(): Observable<{ listPais: Pais[] }> {
     return this.http.get<{ listPais: Pais[] }>(this.myAppUrl + this.myApiUrl);
   }
