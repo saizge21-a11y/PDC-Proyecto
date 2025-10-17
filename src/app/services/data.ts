@@ -23,12 +23,12 @@ export class DataServices {
 
   constructor(private http: HttpClient) {
     this.myAppUrl = environment.apiUrl;
-    this.myApiUrl = '/pais/';
-    this.myApiUrlDep = '/departamento/';
-    this.myApiUrlMun = '/municipio/';
-    this.myApiUrlEm = '/empresa/';
-    this.myApiUrlTr = '/trabajador/';
-    this.myApiUrlAsig = '/empresa-trabajador/'; 
+    this.myApiUrl = 'pais/';
+    this.myApiUrlDep = 'departamento/';
+    this.myApiUrlMun = 'municipio/';
+    this.myApiUrlEm = 'empresa/';
+    this.myApiUrlTr = 'trabajador/';
+    this.myApiUrlAsig = 'empresa-trabajador/'; 
   }
 
   // --- País ---
